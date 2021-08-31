@@ -34,6 +34,12 @@ class Hamburger extends Product {
     static STUFFING_SALAD = { name: 'salad', price: 20, calories: 5 };
     static STUFFING_POTATO = { name: 'potato', price: 15, calories: 10 };
 
+    /* Объект с размерами бургеров */
+    static BURGER_SIZES = {
+        small: Hamburger.SIZE_SMALL.name,
+        big: Hamburger.SIZE_BIG.name
+    }
+
     /* Объект с перечнем начинок и добавок */
     static STUFFING_LIST = {
         cheese: Hamburger.STUFFING_CHEESE,
@@ -71,9 +77,9 @@ class Hamburger extends Product {
     getSize() {
         let burgerName = this.getType().name;
         switch (burgerName) {
-            case 'smallburger':
+            case Hamburger.BURGER_SIZES.small:
                 return 'SMALL';
-            case 'bigburger':
+            case Hamburger.BURGER_SIZES.big:
                 return 'BIG';
             default:
                 throw new Error('Unable to define burger size');
@@ -104,11 +110,7 @@ class Hamburger extends Product {
         let stuffingObj = this.getStuffing(),
             stuffingItem = stuffing.name;
 
-        if (stuffingObj[stuffingItem]) {
-            stuffingObj[stuffingItem] += 1;
-        } else {
-            stuffingObj[stuffingItem] = 1;
-        }
+        stuffingObj[stuffingItem] = stuffingObj[stuffingItem]++ || 1;
     }
 
     /**
@@ -141,12 +143,14 @@ class Hamburger extends Product {
      * @returns {number} Суммарную стоимость бургера и начинки в тугриках.
      */
     calculatePrice() {
-        let hamburgerPrice = this.getType().price,
+        let hamburgerPrice = super.calculatePrice(),
             stuffingPrice = 0,
             stuffingArray = Object.entries(this.getStuffing());
 
             for (let stuffing of stuffingArray) {
-               stuffingPrice += this.getStuffingByName(stuffing[0]).price * stuffing[1];
+                let stuffingName = stuffing[0],
+                    stuffingAmount = stuffing[1];
+               stuffingPrice += this.getStuffingByName(stuffingName).price * stuffingAmount;
             }
 
         return hamburgerPrice + stuffingPrice;
@@ -157,12 +161,14 @@ class Hamburger extends Product {
      * @returns {number} Суммарную калорийность бургера и начинки.
      */
     calculateCalories() {
-        let hamburgerCal = this.getType().calories,
+        let hamburgerCal = super.calculateCalories(),
             stuffingCal = 0,
             stuffingArray = Object.entries(this.getStuffing());
 
             for (let stuffing of stuffingArray) {
-               stuffingCal += this.getStuffingByName(stuffing[0]).calories * stuffing[1];
+                let stuffingName = stuffing[0],
+                    stuffingAmount = stuffing[1];
+               stuffingCal += this.getStuffingByName(stuffingName).calories * stuffingAmount;
             }
 
         return hamburgerCal + stuffingCal;

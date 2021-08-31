@@ -22,6 +22,22 @@ class Product {
     getType() {
         return this._product;
     }
+
+    /**
+     * Подсчет стоимости продукта.
+     * @returns {number} Стоимость продукта в тугриках.
+     */
+    calculatePrice() {
+        return this.getType().price;
+    }
+    
+    /**
+     * Подсчет калорийности продукта.
+     * @returns {number} Калорийность продукта.
+     */
+    calculateCalories() {
+        return this.getType().calories;
+    }
 }
 
 module.exports = {

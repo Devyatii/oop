@@ -33,7 +33,7 @@ bigBurger.removeStuffing(Hamburger.STUFFING_SALAD);
 order.addToOrder(bigBurger);
 
 // Создаем позицию заказа с 300г салата Цезарь.
-let saladOlive = new Salad(Salad.TYPE_CAESAR, 300);
+let saladOlive = new Salad(Salad.CAESAR, 300);
 
 // Создаем позицию заказа с 300г салата Цезарь. Меняем массу салата на 150г.
 saladOlive.changeWeight(150);
@@ -42,7 +42,7 @@ saladOlive.changeWeight(150);
 order.addToOrder(saladOlive);
 
 // Создаем позицию заказа с колой.
-let cola = new Drink(Drink.TYPE_COLA);
+let cola = new Drink(Drink.COLA);
 
 // Добавляем в заказ позицию заказа с колой.
 order.addToOrder(cola);

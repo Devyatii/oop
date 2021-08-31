@@ -23,8 +23,8 @@ class Salad extends Product {
     }
     
     /* Параметры салатов. Цена и калории указаны за 100г. */
-    static TYPE_CAESAR = { name: 'caesar', price: 100, calories: 20 };
-    static TYPE_OLIVIER = { name: 'olivier', price: 50, calories: 80 };
+    static CAESAR = { name: 'caesar', price: 100, calories: 20 };
+    static OLIVIER = { name: 'olivier', price: 50, calories: 80 };
 
     /**
      * Получение массы салата.
@@ -52,7 +52,7 @@ class Salad extends Product {
      * @returns {number} Стоимость салата в тугриках.
      */
     calculatePrice() {
-        let price = this.getType().price,
+        let price = super.calculatePrice(),
             pricePerGram = price / 100;
 
         return this.getWeight() * pricePerGram;
@@ -63,7 +63,7 @@ class Salad extends Product {
      * @returns {number} Калорийность салата.
      */
     calculateCalories() {
-        let calories = this.getType().calories,
+        let calories = super.calculateCalories(),
             caloriesInGram = calories / 100;
 
         return this.getWeight() * caloriesInGram;
